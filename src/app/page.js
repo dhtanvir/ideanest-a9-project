@@ -2,6 +2,7 @@
 
 import Hero from "@/components/Hero";
 import SuccessStories from "@/components/SuccessStories";
+import TopIdeaMakers from "@/components/TopIdeaMakers";
 import Image from "next/image";
 
 export default function Home() {
@@ -11,6 +12,7 @@ export default function Home() {
       {/* <FeaturedCourses /> */}
       {/* <Features /> */}
       <SuccessStories/>
+      <TopIdeaMakers/>
     </div>
   );
 }
