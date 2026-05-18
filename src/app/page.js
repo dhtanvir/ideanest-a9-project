@@ -1,12 +1,12 @@
-import FeaturedCourses from "@/components/FeaturedCourses";
-import Features from "@/components/Features";
+
+
 import Hero from "@/components/Hero";
 import Image from "next/image";
 
 export default function Home() {
   return (
     <div>
-      {/* <Hero/> */}
+      <Hero />
       {/* <FeaturedCourses /> */}
       {/* <Features /> */}
     </div>
