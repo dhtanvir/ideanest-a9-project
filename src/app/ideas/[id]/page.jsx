@@ -1,4 +1,5 @@
-import { auth } from "@/lib/auth";
+
+import CommentSection from "@/components/Comments";
 import { Chip } from "@heroui/react";
 import { BookOpen, Clock, BarChart, Users } from "lucide-react";
 import { headers } from "next/headers";
@@ -125,7 +126,9 @@ export default async function IdeasDetails({ params }) {
             <p className="font-medium">{targetAudience}</p>
           </div>
           {/* comments  */}
-          <div></div>
+          <div>
+            <CommentSection/>
+          </div>
         </div>
       </div>
     </div>

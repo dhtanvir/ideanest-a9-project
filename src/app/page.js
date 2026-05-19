@@ -12,7 +12,7 @@ export default function Home() {
     <div>
       <Hero />
       <FeaturedCourses/>
-      <Features />
+      <Features/>
       <SuccessStories/>
       <TopIdeaMakers/>
     </div>

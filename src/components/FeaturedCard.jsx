@@ -53,7 +53,7 @@ const FeaturedCard = ({ idea }) => {
           <span className="font-black text-blue-600">${estimatedBudget}</span>
         </div>
         <div>
-            <Link href={`/courses/${_id}`}>
+            <Link href={`/ideas/${_id}`}>
                 <Button variant="outline" color="primary" size="sm" className="w-full rounded-full font-bold">
                     View Details
                 </Button>
