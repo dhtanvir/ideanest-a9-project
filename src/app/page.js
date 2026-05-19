@@ -1,5 +1,7 @@
 
 
+import FeaturedCourses from "@/components/FeaturedCourses";
+import Features from "@/components/Features";
 import Hero from "@/components/Hero";
 import SuccessStories from "@/components/SuccessStories";
 import TopIdeaMakers from "@/components/TopIdeaMakers";
