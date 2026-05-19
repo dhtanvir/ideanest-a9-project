@@ -1,4 +1,4 @@
-import { Chip } from "@heroui/react";
+import { Button, Chip } from "@heroui/react";
 import { Users } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -51,6 +51,13 @@ const FeaturedCard = ({ idea }) => {
             <span>0</span>
           </div>
           <span className="font-black text-blue-600">${estimatedBudget}</span>
+        </div>
+        <div>
+            <Link href={`/courses/${_id}`}>
+                <Button variant="outline" color="primary" size="sm" className="w-full rounded-full font-bold">
+                    View Details
+                </Button>
+            </Link>
         </div>
       </div>
     </div>
