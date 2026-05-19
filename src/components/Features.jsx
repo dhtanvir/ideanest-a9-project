@@ -1,7 +1,7 @@
 import { Users, TrendingUp, Lightbulb, Award, Shield, Handshake } from "lucide-react";
 
 const Features = () => {
-    const featureItems = [
+    const IdeasItems = [
         {
             icon: Users,
             title: 'Vibrant Community',
@@ -24,14 +24,15 @@ const Features = () => {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                 <div className="space-y-4 mb-16">
                     <h2 className="text-blue-600 font-bold uppercase tracking-widest text-sm">OUR BENEFITS</h2>
-                    <h3 className="text-4xl font-extrabold text-slate-900">Why Choose IdeaNest?</h3>
+                    <h3 className="text-4xl font-extrabold
+                     text-slate-900">Why Choose IdeaNest?</h3>
                     <p className="text-slate-600 max-w-2xl mx-auto">
                         The ultimate platform to share, validate, and grow your startup ideas
                     </p>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-                    {featureItems.map((f, i) => (
+                    {IdeasItems.map((f, i) => (
                         <div
                             key={i}
                             className="group p-8 bg-white border border-slate-200 rounded-3xl transition-all duration-300 hover:-translate-y-1 hover:shadow-xl text-center space-y-6"
