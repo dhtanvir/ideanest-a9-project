@@ -1,15 +1,50 @@
-import React from "react";
+"use client";
+import CommentListItem from "@/components/CommentListItem";
+import { authClient } from "@/lib/auth-client";
+import { Separator } from "@heroui/react";
+import React, { useEffect, useState } from "react";
 
 const InteractionsPage = () => {
+  const { data: session } = authClient.useSession();
+  const user = session?.user;
+  console.log(user, "user ");
+
+  const [comments, setComments] = useState([]);
+
+  useEffect(() => {
+    const getCommentsByIdeaId = async () => {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/comments-by-userId/${user?.id}`,
+      );
+      const result = await res.json();
+      console.log(result, " result data ");
+      setComments(result.reverse());
+    };
+    if (user) {
+      getCommentsByIdeaId();
+    }
+  }, [user]);
+
   return (
     <div className="container mx-auto space-y-8">
       <div className="py-5">
         <h1 className="text-3xl font-bold">My Interactions</h1>
         <p>View ideas you have liked and comments you have made.</p>
+       
       </div>
       <div className="py-2">
-        <p>Comments(0)</p>
-        
+        <p className="text-2xl font-bold">Comments({comments?.length})</p>
+        {session?.user?.name}
+        <div>
+          <Separator className="bg-black/20 my-2" />
+
+          {/* Comment List */}
+          <div className="space-y-4">
+            {comments?.map((comment, i) => (
+              <CommentListItem key={comment.id || i} comment={comment} />
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );

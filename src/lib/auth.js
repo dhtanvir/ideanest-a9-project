@@ -13,6 +13,7 @@ const db = client.db('ideaNestDb');
 export const auth = betterAuth({
   database: mongodbAdapter(db, {
     // Optional: if you don't provide a client, database transactions won't be enabled.
+
     client,
   }),
   emailAndPassword: {
@@ -20,7 +21,7 @@ export const auth = betterAuth({
   },
   socialProviders: {
     google: {
-      clientId: process.env.GOOGLE_CLIENTID,
+      clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_SECRET,
     },
   },

@@ -1,29 +1,29 @@
-
 import CommentSection from "@/components/Comments";
+import { auth } from "@/lib/auth";
 import { Chip } from "@heroui/react";
-import { BookOpen, Clock, BarChart, Users } from "lucide-react";
+
 import { headers } from "next/headers";
 import Image from "next/image";
 
 const fetchSingleCourse = async (id, token) => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/ideas/${id}`, {
-    // headers: {
-    //     authorization: `Bearer ${token}` || ""
-    // }
+    headers: {
+      authorization: `Bearer ${token}` || "",
+    },
   });
-  const data = res.json();
-  return data || {};
+  const ideasData = await res.json();
+  return ideasData || {};
 };
 
 export default async function IdeasDetails({ params }) {
   const { id } = await params;
-  // const { token } = await auth.api.getToken({
-  //     headers: await headers(),
-  // });
+  const { token } = await auth.api.getToken({
+    headers: await headers(),
+  });
 
   //   const ideas = await fetchSingleCourse(id);
   //   const course = await fetchSingleCourse(id, token);
-  const idea = await fetchSingleCourse(id);
+  const idea = await fetchSingleCourse(id, token);
 
   if (!idea) {
     return (
@@ -127,7 +127,8 @@ export default async function IdeasDetails({ params }) {
           </div>
           {/* comments  */}
           <div>
-            <CommentSection/>
+            <CommentSection idea={idea} />
+            {/* <CommentSection idea={{ _id: idea._id, ideaTitle: idea.ideaTitle }} /> */}
           </div>
         </div>
       </div>

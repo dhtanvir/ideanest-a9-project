@@ -1,21 +1,29 @@
 import CoursesHeader from "@/components/CoursesHeader";
 import { fetchCourses } from "@/lib/courses/data";
-
 import { Button } from "@heroui/react";
 import { BookOpen, Filter } from "lucide-react";
 import IdeasCard from "@/components/IdeasCard";
+import SearchBar from "@/components/SearchBar";
 
 const IdeasPage = async ({ searchParams }) => {
-  console.log(searchParams);
+
+  // console.log(searchParams);
+  // const sParams = await searchParams;
+  // const sParams = await searchParams;
+  
   const sParams = await searchParams;
   console.log(sParams);
-
-  const ideas = await fetchCourses(sParams?.searchTerm || "");
+const ideas = await fetchCourses(sParams?.searchTerm || "");
 
   return (
     <div className="min-h-screen bg-slate-50">
       {/* Header */}
       <CoursesHeader />
+      <div className="bg-white border-b border-slate-200 py-8">
+        <div className="max-w-2xl mx-auto pt-4">
+          <SearchBar/>
+        </div>
+      </div>
 
       <main className="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center mb-12">

@@ -6,14 +6,15 @@ import { BookOpen, Menu, X, User, LogOut, LayoutDashboard } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@heroui/react";
 import Image from "next/image";
-import { signOut, useSession } from "@/lib/auth-client";
+import { authClient, signOut,  } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
 
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const router = useRouter();
-  const { data: session, isPending } = useSession();
+  const { data: session, isPending } = authClient.useSession();
+  // const user = session?.user;
   // console.log(session);
 
   useEffect(() => {
@@ -128,16 +129,10 @@ export function Navbar() {
                     </p>
                   </div>
                   <Link
-                    href="/dashboard"
+                    href="/profile"
                     className="px-4 py-2 text-sm hover:bg-muted flex items-center gap-3 transition-colors"
                   >
-                    <LayoutDashboard className="w-4 h-4" /> Dashboard
-                  </Link>
-                  <Link
-                    href="/settings"
-                    className="px-4 py-2 text-sm hover:bg-muted flex items-center gap-3 transition-colors"
-                  >
-                    <User className="w-4 h-4" /> Settings
+                    <LayoutDashboard className="w-4 h-4" /> Profile
                   </Link>
                   <button
                     onClick={handleLogOut}
@@ -187,10 +182,10 @@ export function Navbar() {
             Add Course
           </Link>
           <Link
-            href="/dashboard"
+            href="/profile"
             className="block px-4 py-3 text-base font-medium text-slate-900 hover:bg-slate-50 rounded-xl"
           >
-            Dashboard
+            Profile
           </Link>
           <div className="pt-4 border-t border-border mt-4">
             <div className="grid grid-cols-2 gap-4">

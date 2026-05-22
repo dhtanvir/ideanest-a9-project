@@ -1,15 +1,15 @@
 "use client";
 
-import { Button, Input } from "@heroui/react";
+import { Button, Input, Separator } from "@heroui/react";
 import Link from "next/link";
 import { User, Mail, Lock, ArrowRight } from "lucide-react";
 import toast from "react-hot-toast";
 import { signUp } from "@/lib/auth-client";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
+import { FcGoogle } from "react-icons/fc";
 
 export default function Register() {
   const router = useRouter();
-
   const handleRegister = async (e) => {
     e.preventDefault();
     // console.log(e.currentTarget);
@@ -23,11 +23,22 @@ export default function Register() {
       ...registerData,
     });
 
+    if (data) {
+      alert("Account created successfully");
+      redirect("/");
+    }
+
     if (error) {
-      toast.error("Registration failed");
+      toast.error("Registration failed!");
       return;
     }
-    router.push("/");
+    // router.push("/");
+  };
+
+  const handleGoogleSignin = async () => {
+    await authClient.signIn.social({
+      provider: "google",
+    });
   };
 
   return (
@@ -39,7 +50,7 @@ export default function Register() {
 
             <div className="text-center space-y-2 relative">
               <h2 className="text-3xl font-black text-slate-900 tracking-tight">
-                Join <span className="text-blue-600">Mentora</span>
+                Join <span className="text-blue-600">IdeaNest</span>
               </h2>
               <p className="text-slate-500 font-medium">
                 Create your account to start learning
@@ -137,6 +148,29 @@ export default function Register() {
                   Sign in
                 </Link>
               </p>
+            </div>
+            {/* Social Login  */}
+            <div className="space-y-5">
+             
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center">
+                <span className="w-full border-t border-slate-100"></span>
+              </div>
+              <div className="relative flex justify-center text-xs uppercase">
+                <span className="bg-white px-4 text-slate-400 font-bold tracking-widest">
+                  Or with email
+                </span>
+              </div>
+            </div>
+            <div>
+              <Button
+                onClick={handleGoogleSignin}
+                variant="outline"
+                className={"w-full rounded-none"}
+              >
+                <FcGoogle /> Sign in with Google
+              </Button>
+            </div>
             </div>
           </div>
         </div>
