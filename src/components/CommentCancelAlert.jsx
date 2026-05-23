@@ -33,7 +33,7 @@ export function CommentCancelAlert({ comment }) {
             <AlertDialog.CloseTrigger />
             <AlertDialog.Header>
               <AlertDialog.Icon status="danger" />
-              <AlertDialog.Heading>Delete Your Comments</AlertDialog.Heading>
+              <AlertDialog.Heading>Delete Your Comments permanently</AlertDialog.Heading>
             </AlertDialog.Header>
             <AlertDialog.Body>
               <p>This will permanently delete</p>
