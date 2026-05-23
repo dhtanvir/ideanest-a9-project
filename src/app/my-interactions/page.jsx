@@ -2,6 +2,7 @@
 import CommentListItem from "@/components/CommentListItem";
 import { authClient } from "@/lib/auth-client";
 import { Separator } from "@heroui/react";
+import Image from "next/image";
 import React, { useEffect, useState } from "react";
 
 const InteractionsPage = () => {
@@ -30,11 +31,11 @@ const InteractionsPage = () => {
       <div className="py-5">
         <h1 className="text-3xl font-bold">My Interactions</h1>
         <p>View ideas you have liked and comments you have made.</p>
-       
+        
       </div>
       <div className="py-2">
         <p className="text-2xl font-bold">Comments({comments?.length})</p>
-        {session?.user?.name}
+
         <div>
           <Separator className="bg-black/20 my-2" />
 

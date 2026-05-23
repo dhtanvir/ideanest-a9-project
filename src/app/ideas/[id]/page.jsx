@@ -50,9 +50,9 @@ export default async function IdeasDetails({ params }) {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-12">
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+      <div className="grid grid-cols-1 lg:grid-cols-6 gap-8">
         {/* LEFT SIDE */}
-        <div className="lg:col-span-2 space-y-8">
+        <div className="lg:col-span-3 space-y-8">
           {/* IMAGE */}
           <div className="relative aspect-video rounded-3xl overflow-hidden shadow-xl">
             <Image
@@ -108,7 +108,7 @@ export default async function IdeasDetails({ params }) {
         </div>
 
         {/* RIGHT SIDE */}
-        <div className="bg-white p-6 rounded-2xl shadow-lg space-y-6">
+        <div className="bg-white p-6 rounded-2xl shadow-lg space-y-6 lg:col-span-3 ">
           <div>
             <p className="text-sm text-gray-500">Budget</p>
             <h2 className="text-3xl font-black text-blue-600">
