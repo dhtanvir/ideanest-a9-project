@@ -11,7 +11,7 @@ import { redirect } from "next/navigation";
 
 export default function Login() {
   const handleLogin = async (e) => {
-    e.preventDefault();
+  e.preventDefault();  
     // console.log(e.currentTarget);
 
     const formData = new FormData(e.currentTarget);
@@ -154,3 +154,5 @@ export default function Login() {
     </div>
   );
 }
+
+

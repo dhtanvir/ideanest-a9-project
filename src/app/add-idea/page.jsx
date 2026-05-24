@@ -1,3 +1,5 @@
+"use client";
+import { authClient } from "@/lib/auth-client";
 import {
   Button,
   Input,
@@ -11,31 +13,53 @@ import {
   ListBoxItem,
 } from "@heroui/react";
 
-import {
-  BookPlus,
-  Image as ImageIcon,
-  DollarSign,
-  Clock,
-  List,
-} from "lucide-react";
+import { BookPlus } from "lucide-react";
 import { redirect } from "next/navigation";
+import toast from "react-hot-toast";
 
 const CATEGORIES = [
-  "Web Development",
-  "Data Science",
-  "Design",
-  "Business",
-  "Marketing",
-  "Personal Development",
+  "Tech",
+  "Education",
+  "Health",
+  "AI",
+  "Travel",
+  "E-commerce",
+  "Food",
+  "Finance",
 ];
 
-export default async function AddIdeaPage() {
-  const handleAddIdea = async (formData) => {
-    "use server";
-    const data = await addIdea(formData);
-    if (data?.insertedId) {
-      redirect("/ideas");
-    }
+const AddIdeaPage = () => {
+  const handelSubmit = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.currentTarget);
+
+    const addData = Object.fromEntries(formData.entries());
+
+    // tags string → array
+    addData.tags = addData.tags
+      ? addData.tags.split(",").map((tag) => tag.trim())
+      : [];
+
+    // userId add
+    const session = await authClient.getSession(); 
+    addData.userId = session?.user?.id;
+
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/ideas`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(addData),
+    });
+
+    const ideasData = await res.json();
+
+    toast.success('Successfully Add your Ideas!')
+    redirect('/ideas')
+
+
+    // console.log("add Data", ideasData);
   };
 
   return (
@@ -56,7 +80,7 @@ export default async function AddIdeaPage() {
           </p>
         </div>
         <form
-          action={handleAddIdea}
+          onSubmit={handelSubmit}
           className="space-y-8 bg-white p-8 rounded-3xl border border-slate-100 shadow-sm"
         >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -69,8 +93,8 @@ export default async function AddIdeaPage() {
                 Idea Title <span className="text-red-500">*</span>
               </label>
               <Input
-                id="title"
-                name="title"
+                id="ideaTitle"
+                name="ideaTitle"
                 required
                 placeholder="E.g., Next-gen AI Assistant"
                 className="w-full h-12 border-2 border-slate-200 focus-within:border-indigo-600 rounded-xl bg-white transition-all duration-300 shadow-none"
@@ -136,8 +160,8 @@ export default async function AddIdeaPage() {
                 Detailed Description <span className="text-red-500">*</span>
               </label>
               <TextArea
-                id="description"
-                name="description"
+                id="detailedDescription"
+                name="detailedDescription"
                 required
                 placeholder="Explain how your idea works in detail..."
                 className="w-full h-36 border-2 border-slate-200 focus-within:border-indigo-600 rounded-xl bg-white transition-all duration-300 shadow-none resize-y p-3"
@@ -169,8 +193,8 @@ export default async function AddIdeaPage() {
                 Image URL
               </label>
               <Input
-                id="thumbnail"
-                name="thumbnail"
+                id="imageURL"
+                name="imageURL"
                 type="url"
                 placeholder="https://example.com/image.jpg"
                 className="w-full h-12 border-2 border-slate-200 focus-within:border-indigo-600 rounded-xl bg-white transition-all duration-300 shadow-none"
@@ -186,9 +210,10 @@ export default async function AddIdeaPage() {
                 Estimated Budget
               </label>
               <Input
-                id="budget"
-                name="budget"
-                placeholder="E.g., $10k - $50k"
+                id="estimatedBudget"
+                name="estimatedBudget"
+                placeholder="10k - 50k"
+                startContent={<span className="text-slate-500 text-sm">$</span>}
                 className="w-full h-12 border-2 border-slate-200 focus-within:border-indigo-600 rounded-xl bg-white transition-all duration-300 shadow-none"
               />
             </div>
@@ -257,4 +282,6 @@ export default async function AddIdeaPage() {
       </div>
     </div>
   );
-}
+};
+
+export default AddIdeaPage;

@@ -4,7 +4,7 @@ import { AlertDialog, Button } from "@heroui/react";
 import { IoTrashBin } from "react-icons/io5";
 
 export function CommentCancelAlert({ comment }) {
-  console.log(" comment delete", comment);
+  // console.log(" comment delete", comment);
 
   const {_id } = comment
 
@@ -18,8 +18,9 @@ export function CommentCancelAlert({ comment }) {
     );
     const data = await res.json();
     
+    window.location.reload()
 
-    console.log("data Id", data);
+    // console.log("data Id", data);
   };
 
   return (
