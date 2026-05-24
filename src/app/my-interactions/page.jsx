@@ -14,7 +14,9 @@ const InteractionsPage = () => {
   useEffect(() => {
     const getCommentsByIdeaId = async () => {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/comments-by-userId/${user?.id}`,
+        `${process.env.NEXT_PUBLIC_API_URL}/comments-by-userId/${user?.id}`,{
+           cache: "no-store",
+        }
       );
       const result = await res.json();
       console.log(result, " result data ");

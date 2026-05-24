@@ -1,7 +1,6 @@
 import CommentSection from "@/components/Comments";
 import { auth } from "@/lib/auth";
 import { Chip } from "@heroui/react";
-
 import { headers } from "next/headers";
 import Image from "next/image";
 
@@ -9,7 +8,10 @@ const fetchSingleCourse = async (id, token) => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/ideas/${id}`, {
     headers: {
       authorization: `Bearer ${token}` || "",
+      
     },
+     cache: "no-store",
+    
   });
   const ideasData = await res.json();
   return ideasData || {};
